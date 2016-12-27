@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    Body{
+    background-color: lightblue;
+    }
+</style>
+
+{{^name}}
+<form action="/login" method="post">
+    <input type="text" placeholder="Enter your name" name="userName"/>
+    <button type="submit">Login</button>
+</form>
+{{/name}}
+
+<h1>{{#name}} Hello {{.}}</h1>
+
+<br/><br/>
+
+<form action="/add-message" method="post">
+    <input type="text" placeholder="Write a message" name="text">
+    <button type="submit">Submit</button>
+</form>
+
+<br/><br/>
+
+<form action = "/edit-message" method = "post">
+    <input type = "text" placeholder = "id" name = "enterId"/>
+    <input type = "text" placeholder="Edit message" name = "editMessage"/>
+    <button type="submit">Edit Message</button>
+</form>
+
+<br>
+
+{{#name}}
+<h3>Messages from {{.}}:</h3>
+{{/name}}
+
+<p>
+<ul>
+    {{#messages}}
+    <li>{{id}}.  {{text}}
+        <form action="/delete-message" method="post">
+            <input type="hidden" value="{{id}}" name="id"/>
+            <button type="submit">Delete</button>
+        </form><br>
+    </li>
+    {{/messages}}
+</ul>
+</p>
+
+{{/name}}
+
+</body>
+</html>
